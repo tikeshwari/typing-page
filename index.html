@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Practice - Welcome</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-image: url('https://c4.wallpaperflare.com/wallpaper/198/270/331/keyboard-technics-computer-key-wallpaper-preview.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding-top: 50px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #121212;
+            color: #eaeaea;
+            background-image: none;
+        }
+
+        .welcome-container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            max-width: 700px;
+            width: 90%;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #ffdf6c;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        p {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            line-height: 1.8;
+            color: #eaeaea;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        ul li {
+            font-size: 1.2rem;
+            margin: 12px 0;
+            color: #d4d4d4;
+            display: flex;
+            align-items: center;
+        }
+
+        ul li::before {
+            content: '✔';
+            color: #ffdf6c;
+            margin-right: 12px;
+            font-size: 1.4rem;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Space between buttons */
+            margin-top: 20px;
+        }
+
+        .btn-container button,
+        .btn-container select {
+            font-size: 1.2rem;
+            padding: 15px 30px;
+            border-radius: 10px;
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #ff6347;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: 150px; /* Equal width for all buttons */
+            text-transform: capitalize;
+            height: 60px;
+        }
+
+        .btn-container button:hover,
+        .btn-container select:hover {
+            background-color: #444;
+            box-shadow: 0 8px 20px rgba(255, 99, 71, 0.6);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="welcome.html">Typing Test</a></li>
+        </ul>
+    </nav>
+    <div class="welcome-container">
+        <h1>Welcome to Typing Practice</h1>
+        <p>Enhance your typing speed and accuracy with engaging exercises. Challenge yourself and monitor your growth!</p>
+        <ul>
+            <li>⏳ Practice for a set time limit</li>
+            <li>📊 Real-time feedback on speed and accuracy</li>
+        </ul>
+
+        <!-- Button Container -->
+        <div class="btn-container">
+            <button id="modeToggle">Dark Mode</button>
+            <select id="timeLimit">
+                <option value="1">1 Min</option>
+                <option value="2">2 Min</option>
+                <option value="3">3 Min</option>
+                <option value="4">4 Min</option>
+                <option value="5">5 Min</option>
+                <option value="30">30 Min</option>
+            </select>
+            <button onclick="startTyping()">Start</button>
+        </div>
+    </div>
+
+    <script>
+        function startTyping() {
+            // Get the selected time value
+            const timeLimit = document.getElementById('timeLimit').value;
+
+            // Redirect to typing practice page with selected time as a query parameter
+            window.location.href =` welcome.html?time=${timeLimit}`;
+        }
+
+        // Check for dark mode preference from localStorage
+        const body = document.body;
+        const modeToggle = document.getElementById('modeToggle');
+
+        // Apply dark mode if it's set in localStorage
+        if (localStorage.getItem('darkMode') === 'true') {
+            body.classList.add('dark-mode');
+            modeToggle.textContent = 'Light Mode';
+        }
+
+        // Dark Mode Toggle Functionality
+        modeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+
+            // Save dark mode preference in localStorage
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'true');
+                modeToggle.textContent = 'Light Mode';
+            } else {
+                localStorage.setItem('darkMode', 'false');
+                modeToggle.textContent = 'Dark Mode';
+            }
+        });
+    </script>
+</body>
+
+</html>
